@@ -93,5 +93,5 @@ jobs:
         with:
         image-ref: $ECR_REGISTRY/ecommerce/product-service:${{ github.sha }}
         format: table
-        exit-code: 1
+        exit-code: '1'
         severity: CRITICAL,HIGH
