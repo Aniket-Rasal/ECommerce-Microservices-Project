@@ -88,3 +88,10 @@ jobs:
           docker build -t $ECR_REGISTRY/ecommerce/product-service:$IMAGE_TAG ./product-service
           docker push $ECR_REGISTRY/ecommerce/product-service:$IMAGE_TAG
           echo "product-service image: $ECR_REGISTRY/ecommerce/product-service:$IMAGE_TAG"
+      - name: Scan image with Trivy
+        uses: aquasecurity/trivy-action@master
+        with:
+        image-ref: $ECR_REGISTRY/ecommerce/product-service:${{ github.sha }}
+        format: table
+        exit-code: 1
+        severity: CRITICAL,HIGH
