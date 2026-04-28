@@ -6,3 +6,6 @@ __pycache__/
 *.tfstate
 *.tfstate.backup
 .DS_Store
+infra/k8s/secrets/
+*.tfvars
+.terraform.lock.hcl
