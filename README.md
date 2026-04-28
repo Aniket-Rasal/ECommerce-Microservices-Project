@@ -95,3 +95,9 @@ kubectl get pods
 kubectl get svc gateway
 curl http://GATEWAY_URL/health
 ```
+## ⚠️ Challenges & Learnings
+
+- Resolved ConfigMap missing issue causing pod startup failure  
+- Debugged AWS CNI IP exhaustion problem  
+- Fixed 502 Bad Gateway due to Nginx misconfiguration  
+- Handled Kubernetes scheduling limits due to node capacity  
