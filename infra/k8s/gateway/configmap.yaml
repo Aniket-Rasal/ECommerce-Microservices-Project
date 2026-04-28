@@ -1,0 +1,32 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: nginx-config
+  namespace: default
+data:
+  nginx.conf: |
+    events {}
+    http {
+      resolver kube-dns.kube-system.svc.cluster.local valid=30s;
+
+      server {
+        listen 80;
+
+        location /users {
+          set $user_upstream http://user-service:3000;
+          proxy_pass $user_upstream;
+          proxy_set_header Host $host;
+        }
+
+        location /products {
+          set $product_upstream http://product-service:8000;
+          proxy_pass $product_upstream;
+          proxy_set_header Host $host;
+        }
+
+        location /health {
+          return 200 'gateway ok\n';
+          add_header Content-Type text/plain;
+        }
+      }
+    }
