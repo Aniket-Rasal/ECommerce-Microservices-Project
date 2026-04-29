@@ -1,4 +1,4 @@
-# E-Commerce DevOps Project
+# E-Commerce Microservices Project
 
 A production-grade DevOps implementation of a 3-tier microservices e-commerce backend.
 
