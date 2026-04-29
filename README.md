@@ -117,4 +117,34 @@ What it teaches: Time synchronization is infrastructure. NTP misconfiguration br
 9. Resolved ConfigMap missing issue causing pod startup failure
 10. Debugged AWS CNI IP exhaustion problem  
 12. Fixed 502 Bad Gateway due to Nginx misconfiguration  
-13. Handled Kubernetes scheduling limits due to node capacity  
+13. Handled Kubernetes scheduling limits due to node capacity
+
+## Known Limitations & Next Steps
+
+### Current Limitations
+
+**Microservices Architecture**
+- User Service and Product Service share a single RDS instance — each service should own its own schema in a production system
+- No async communication between services — order processing would require an event bus (SQS/SNS)
+- Only 2 services implemented — a real e-commerce backend needs Order, Cart, Payment, and Notification services
+
+**Security**
+- Kubernetes Secrets are base64-encoded, not encrypted at rest — production should use AWS Secrets Manager with IRSA (IAM Roles for Service Accounts)
+- No TLS termination — production needs AWS Load Balancer Controller with cert-manager
+
+**Observability**
+- No metrics stack (Prometheus/Grafana) — skipped due to lab cost constraints
+- No distributed tracing (AWS X-Ray or Jaeger)
+- No centralized logging (ELK or Loki)
+
+**Networking**
+- Raw Nginx pod used as gateway — production should use NGINX Ingress Controller or AWS ALB Ingress Controller
+- No Network Policies restricting service-to-service traffic
+
+### Next Steps
+- [ ] Split RDS into per-service schemas (`user_db`, `product_db`)
+- [ ] Add SQS event bus between services for async order processing
+- [ ] Replace Kubernetes Secrets with AWS Secrets Manager + IRSA
+- [ ] Add Prometheus + Grafana monitoring stack
+- [ ] Implement NGINX Ingress Controller with TLS
+- [ ] Add Order Service and Cart Service
