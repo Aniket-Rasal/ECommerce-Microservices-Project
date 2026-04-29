@@ -4,22 +4,8 @@ A production-grade DevOps implementation of a 3-tier microservices e-commerce ba
 
 ## Architecture
 
-GitHub → GitHub Actions CI/CD
-              ↓
-           AWS ECR
-              ↓
-         EKS Cluster
-         ┌────────────────────────┐
-         │  Nginx Gateway (LB)    │
-         │  ↙              ↘     │
-         │ user-service  product-service │
-         │       ↘        ↙      │
-         │      RDS PostgreSQL    │
-         └────────────────────────┘
-              ↑
-           Terraform (VPC, EKS, RDS)
-              ↑
-         S3 Remote State
+<img width="1440" height="1240" alt="image" src="https://github.com/user-attachments/assets/7513f1b1-b9f5-4981-8342-e4045eaaa11c" />
+
 
 ## Tech Stack
 
